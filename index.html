@@ -28,28 +28,28 @@
 
     <script>
       document.getElementById("form").addEventListener("submit", function (e) {
-        let filled = true;
+        let valid = true;
 
         const name = document.getElementById("name").value;
         if (name === "") {
           document.getElementById("errorName").textContent = "Fyll i namn.";
-          filled = false;
+          valid = false;
         }
 
         const email = document.getElementById("email").value;
         if (email === "") {
           document.getElementById("errorMail").textContent = "Fyll i epost.";
-          filled = false;
+          valid = false;
         }
 
         const message = document.getElementById("message").value;
         if (message === "") {
           document.getElementById("errorMessage").textContent =
             "Fyll i ett meddlande.";
-          filled = false;
+          valid = false;
         }
 
-        if (!filled) {
+        if (!valid) {
           e.preventDefault();
         }
       });
