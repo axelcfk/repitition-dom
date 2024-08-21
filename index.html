@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <form id="form">
+        <h2>Namn:</h2>
+        <input type="text" id="name" />
+        <div id="errorName"></div>
+
+        <h2>E-post:</h2>
+        <input type="email" id="email" />
+        <div id="errorMail"></div>
+
+        <h2>Meddelande:</h2>
+        <textarea id="message"></textarea>
+        <div id="errorMessage"></div>
+
+        <button type="submit">Skicka</button>
+      </form>
+    </div>
+    <script>
+      document.getElementById("form").addEventListener("submit", function (e) {
+        let valid = true;
+
+        const name = document.getElementById("name").value;
+        if (name === "") {
+          document.getElementById("errorName").textContent = "Fyll i namn.";
+          valid = false;
+        }
+
+        const email = document.getElementById("email").value;
+        if (email === "") {
+          document.getElementById("errorMail").textContent = "Fyll i epost.";
+          valid = false;
+        }
+
+        const message = document.getElementById("message").value;
+        if (message === "") {
+          document.getElementById("errorMessage").textContent =
+            "Fyll i ett meddlande.";
+          valid = false;
+        }
+
+        if (!valid) {
+          e.preventDefault();
+        }
+      });
+    </script>
+  </body>
+</html>
