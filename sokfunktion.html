@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="container">
+      <h1>Search Pokemon</h1>
+      <input type="text" placeholder="Search here" id="inputField" />
+      <div id="error"></div>
+      <button id="searchButton">Search</button>
+    </div>
+
+    <script>
+      document
+        .getElementById("searchButton")
+        .addEventListener("click", async function () {
+          const input = document.getElementById("inputField").value;
+
+          if (input === "") {
+            document.getElementById("error").textContent =
+              "Enter a pokemon name";
+          } else {
+            document.getElementById("error").textContent = "";
+
+            const response = await fetch(
+              `https://pokeapi.co/api/v2/pokemon/${input}`
+            );
+            const data = await response.json();
+
+            console.log(data);
+
+            if (response.ok) {
+              const resultDiv = document.createElement("div");
+              resultDiv.style.backgroundColor = "yellow";
+
+              const name = document.createElement("h2");
+              name.textContent = data.name.toUpperCase();
+
+              const height = document.createElement("p");
+              height.textContent = `Height: ${data.height}`;
+
+              const weight = document.createElement("p");
+              weight.textContent = `Weight: ${data.weight}`;
+
+              const xp = document.createElement("p");
+              xp.textContent = `XP: ${data.base_experience}`;
+
+              const img = document.createElement("img");
+              img.src = data.sprites.front_default;
+
+              resultDiv.appendChild(name);
+              resultDiv.appendChild(img);
+              resultDiv.appendChild(height);
+              resultDiv.appendChild(weight);
+              resultDiv.appendChild(xp);
+
+              document.getElementById("container").appendChild(resultDiv);
+            }
+          }
+        });
+    </script>
+  </body>
+</html>
